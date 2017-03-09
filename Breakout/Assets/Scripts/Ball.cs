@@ -6,7 +6,8 @@ public class Ball : MonoBehaviour {
 
 	public Vector2 startingVelocity = new Vector2(15, -20);
 	private Vector3 startingPosition; 
-	public GameObject gameover;
+	public GameObject gameoverSign;
+	public GameObject youwinSign;// to make a layer of scene
 
 	int lives = 3;
 
@@ -42,6 +43,14 @@ public class Ball : MonoBehaviour {
 	}
 	void DoGamerOver()
 	{
-		gameover.SetActive (true);
+		gameoverSign.SetActive (true);
+	}
+	public void YouBrokeABrick() // needs to be public so you can find it in brick script
+	{
+		var bricksleft = FindObjectsOfType<Brick> ().Length; // This is how many/long bricks are left in the scene
+		Debug.Log("bricksleft;"+ bricksleft);
+		if(bricksleft == 0) {
+			youwinSign.SetActive (true); // how to set the you win sign to come up when there are no bricks left
+		}
 	}
 }
