@@ -9,12 +9,15 @@ public class Ball : MonoBehaviour {
 	public GameObject gameoverSign;
 	public GameObject youwinSign;// to make a layer of scene
 
+
 	int lives = 3;
+
 
 	// Use this for initialization
 	void Start () {
 		startingPosition = transform.position;
 		GetComponent<Rigidbody2D> ().velocity = startingVelocity;
+
 	}
 	
 	// Update is called once per frame
@@ -33,6 +36,7 @@ public class Ball : MonoBehaviour {
 		Debug.Log ("You are out");
 		lives = lives - 1;
 
+
 		transform.position = startingPosition;
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
 
@@ -47,6 +51,8 @@ public class Ball : MonoBehaviour {
 	}
 	public void YouBrokeABrick() // needs to be public so you can find it in brick script
 	{
+		
+
 		var bricksleft = FindObjectsOfType<Brick> ().Length; // This is how many/long bricks are left in the scene
 		Debug.Log("bricksleft;"+ bricksleft);
 		if(bricksleft == 0) {
