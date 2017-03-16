@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour {
 
@@ -8,16 +9,19 @@ public class Ball : MonoBehaviour {
 	private Vector3 startingPosition; 
 	public GameObject gameoverSign;
 	public GameObject youwinSign;// to make a layer of scene
+	public Text livesValue;
+	public Text pointsValue;
 
 
 	int lives = 3;
+	int points = 0;
 
 
 	// Use this for initialization
 	void Start () {
 		startingPosition = transform.position;
 		GetComponent<Rigidbody2D> ().velocity = startingVelocity;
-
+		livesValue.text = lives.ToString();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +39,7 @@ public class Ball : MonoBehaviour {
 	{
 		Debug.Log ("You are out");
 		lives = lives - 1;
+		livesValue.text = lives.ToString();
 
 
 		transform.position = startingPosition;
@@ -49,9 +54,10 @@ public class Ball : MonoBehaviour {
 	{
 		gameoverSign.SetActive (true);
 	}
-	public void YouBrokeABrick() // needs to be public so you can find it in brick script
+	public void YouBrokeABrick(int worth) // needs to be public so you can find it in brick script, worth is a var to change # of points per brick
 	{
-		
+		points += worth;
+		pointsValue.text = points.ToString();
 
 		var bricksleft = FindObjectsOfType<Brick> ().Length; // This is how many/long bricks are left in the scene
 		Debug.Log("bricksleft;"+ bricksleft);
